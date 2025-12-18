@@ -966,6 +966,11 @@ impl CpuInterface {
         ICC_PMR_EL1.write(ICC_PMR_EL1::PRIORITY.val(mask as _));
     }
 
+    /// Get the priority mask
+    pub fn get_priority_mask(&self) -> u8 {
+        ICC_PMR_EL1.read(ICC_PMR_EL1::PRIORITY) as u8
+    }
+
     pub fn set_irq_enable(&self, id: IntId, enable: bool) {
         assert!(
             id.is_private(),

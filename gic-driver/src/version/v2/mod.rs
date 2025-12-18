@@ -437,6 +437,11 @@ impl CpuInterface {
         self.gicc().PMR.write(gicc::PMR::Priority.val(mask as u32));
     }
 
+    /// Get the priority mask
+    pub fn get_priority_mask(&self) -> u8{
+        self.gicc().PMR.read(gicc::PMR::Priority) as u8
+    }
+
     pub fn set_irq_enable(&self, id: IntId, enable: bool) {
         assert!(
             id.is_private(),
